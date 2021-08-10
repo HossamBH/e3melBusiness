@@ -16,8 +16,13 @@ Route::group(['namespace' => 'Dashboard', 'prefix' => 'dashboard', 'as' => 'admi
 
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::get('/logout', 'LoginController@logout')->name('logout');
-    Route::get('activation/{category}', 'CategoryController@activate')->name('categories.activation');
+
+    // category
+    Route::get('categories/activation/{category}', 'CategoryController@activate')->name('categories.activation');
     Route::resource('categories', CategoryController::class)->except('show');
+
+    // course
+    Route::get('courses/activation/{course}', 'CourseController@activate')->name('courses.activation');
     Route::resource('courses', CourseController::class);
 
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Dashboard\Course;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,12 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:191|unique:categories,id,' . $this->segment(3),
+            'name' => 'required|max:191|unique:courses,name,' . $this->segment(3),
+            'description' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'rating' => 'required|numeric|between:0,5',
+            'levels' => 'required|in:beginner,immediat,high',
+            'hours' => 'required|numeric|gt:0',
             'active' => 'required|in:0,1'
         ];
     }

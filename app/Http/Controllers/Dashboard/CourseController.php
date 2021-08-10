@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\Course\CreateRequest;
+use App\Http\Requests\Dashboard\Course\UpdateRequest;
+use App\Models\Category;
 
 class CourseController extends Controller
 {
@@ -26,7 +29,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::select('id', 'name')->get();
+        return view('dashboard.courses.create', compact('categories'));
     }
 
     /**
@@ -35,20 +39,10 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        Course::create($request->all());
+        return redirect(route('admin.courses.index'));
     }
 
     /**
@@ -57,9 +51,10 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        $categories = Category::select('id', 'name')->get();
+        return view('dashboard.courses.edit', compact('course', 'categories'));
     }
 
     /**
@@ -69,9 +64,11 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, Course $course)
     {
-        //
+        $course->update($request->all());
+        return redirect(route('admin.courses.index'));
+
     }
 
     /**
@@ -80,8 +77,22 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()->back();
+    }
+
+    /**
+     * Change the status the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function activate(Course $course)
+    {
+        $course->active == 0 ? $course->active = 1 : $course->active = 0;
+        $course->save();
+        return redirect()->back();
     }
 }

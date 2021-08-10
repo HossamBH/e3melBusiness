@@ -16,4 +16,12 @@ class Category extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($category) {
+            $category->courses()->delete();
+        });
+    }
 }

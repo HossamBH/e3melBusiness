@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\CreateRequest;
-use App\Http\Requests\Category\UpdateRequest;
+use App\Http\Requests\Dashboard\Category\CreateRequest;
+use App\Http\Requests\Dashboard\Category\UpdateRequest;
 
 class CategoryController extends Controller
 {

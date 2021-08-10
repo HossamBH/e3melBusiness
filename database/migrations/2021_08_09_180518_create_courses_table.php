@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration
             $table->longText('description');
             $table->foreignId('category_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->float('rating');
-            $table->integer('views');
+            $table->integer('views')->default(0);
             $table->enum('levels', ['beginner', 'immediat', 'high']);
             $table->integer('hours');
             $table->tinyInteger('active');
