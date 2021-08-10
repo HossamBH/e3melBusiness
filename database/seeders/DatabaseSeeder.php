@@ -14,12 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Dashboard User
         DB::table('users')->delete();
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('12345678'),
+        ]);
+
+        // Mobile App Client
+        DB::table('clients')->delete();
+        DB::table('clients')->insert([
+            'name' => 'Test',
+            'email' => 'test@e3melBusiness.com',
+            'password' => bcrypt('123456'),
         ]);
     }
 }
