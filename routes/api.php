@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'Api'], function ($router) {
+
+    // Auth
+    Route::group(['prefix' => 'auth'], function ($router) {
+        Route::post('login', 'AuthController@login');
+        Route::post('register', 'AuthController@register');
+    });
+
+    //App Apis
+    Route::group(['middleware' => ['auth:clientApi']], function ($router) {
+
+        //Get courses
+        Route::get('categories', 'MainController@getCategories');
+
+        //Get courses
+        Route::get('courses', 'MainController@getCourses');
+
+        //Get courses of specific category
+        Route::get('courses/{category}', 'MainController@getCoursesOfCategory');
+    });
 });

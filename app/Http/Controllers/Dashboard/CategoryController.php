@@ -11,6 +11,11 @@ use App\Http\Requests\Dashboard\Category\UpdateRequest;
 class CategoryController extends Controller
 {
     /**
+        **************** Important ****************
+        * There is a global Scope for active categories.
+    */
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

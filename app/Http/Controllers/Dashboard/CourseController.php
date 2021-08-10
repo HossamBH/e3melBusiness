@@ -12,6 +12,11 @@ use App\Models\Category;
 class CourseController extends Controller
 {
     /**
+        **************** Important ****************
+        * There is a global Scope for active courses.
+    */
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

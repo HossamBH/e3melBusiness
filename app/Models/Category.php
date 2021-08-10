@@ -24,4 +24,15 @@ class Category extends Model
             $category->courses()->delete();
         });
     }
+
+    /**
+     * Scope a query to only include active categories.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
 }
